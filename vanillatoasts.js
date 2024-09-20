@@ -35,9 +35,9 @@
         '\tInvoke create method when DOM\s readyState is complete'
       ].join('\n'))
     },
-    toasts: {} //store toasts to modify later
+    toasts: {}, //store toasts to modify later
+    autoIncrement : 0
   };
-  var autoincrement = 0;
 
   // Initialize library
   function init() {
@@ -48,10 +48,11 @@
 
     // @Override
     // Replace create method when DOM has finished loading
+    VanillaToasts.toasts = {};
+    VanillaToasts.autoIncrement = 0;
     VanillaToasts.create = function (options) {
       var toast = document.createElement('div');
-      toast.id = ++autoincrement;
-      toast.id = 'toast-' + toast.id;
+      toast.id = `toast-${++VanillaToasts.autoIncrement}`;
       toast.className = 'vanillatoasts-toast';
 
       // title
